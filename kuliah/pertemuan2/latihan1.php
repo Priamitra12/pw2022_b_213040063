@@ -18,7 +18,7 @@ echo '<hr>';
 // tidak boleh ada spasi 
 
 $nama = 'alip';
-echo $nama;
+echo  "Halo, nama saya $nama" ;
 
 echo '<hr>';
 
@@ -32,7 +32,7 @@ echo '<br>';
 // .
 $nama_depan = "priamitra";
 $nama_belakang = "nur";
-echo $nama_depan ."". $nama_belakang;
+echo $nama_depan . " " . $nama_belakang;
 echo "<br>";
 echo "<hr>";
 
@@ -79,7 +79,7 @@ echo '<hr>';
 $x =10;
 $x++;
 
-echo $x
+echo $x;
 
 
 
