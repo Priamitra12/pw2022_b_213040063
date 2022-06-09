@@ -100,7 +100,14 @@ function ubah($data) {
     $nama = htmlspecialchars($data["nama"]);
 	$agama = htmlspecialchars($data["agama"]);
 	$bidang = htmlspecialchars($data["bidang"]);
-	$gambar = htmlspecialchars($data["gambar"]);
+	$gambarlama=htmlspecialchars($data["gambarlama"]);
+
+	if($_FILES['gambar']['error'] === 4){
+		$gambar = $gambarlama;
+	} else {
+		$gambar = upload();
+	}
+
 	$lahir = htmlspecialchars($data["lahir"]);
 
     $query = "UPDATE dokter SET

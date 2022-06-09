@@ -1,57 +1,135 @@
-<!doctype html>
+<?php 
+session_start();
+require 'functions.php';
+
+
+if( isset($_SESSION["login"]) ) {
+	header("Location: index.php");
+	exit;
+}
+
+
+if( isset($_POST["login"]) ) {
+
+	$username = $_POST["username"];
+	$password = $_POST["password"];
+
+	$result = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username'");
+
+	// cek username
+	if( mysqli_num_rows($result) === 1 ) {
+
+		// cek password
+		$row = mysqli_fetch_assoc($result);
+		if( password_verify($password, $row["password"]) ) {
+			// set session
+			$_SESSION["login"] = true;
+
+			//cek role admin
+            if ($row['role']=="admin") {
+                $_SESSION['id_admin'] = $row['id'];
+                $_SESSION['role'] = "admin";
+                header("location:homeadmin.php");
+            } else if ($row['role']=="user") {
+                $_SESSION['id_user'] = $row['id'];
+                $_SESSION['role'] = "user";
+                header("location:homeuser.php");
+            }
+
+			// header("Location: index.php");
+			exit;
+		}
+	}
+
+	$error = true;
+
+}
+
+?>
+
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('img/bg-02.jpg');">
+			<div class="wrap-login100 p-t-30 p-b-50">
+				<span class="login100-form-title p-b-41">
+					Account Login
+				</span>
+				<form method="post" id="login-form" class="login100-form validate-form p-b-33 p-t-5">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" id="username" name="username" placeholder="User name">
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
 
-    <title>Halaman Login</title>
-  </head>
-  <body>
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" id="password" name="password" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
 
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-        Halaman Login
-        </div>
-        <form action="" method="post">
-            <div class="card-body">
-            <label for="basic-url" class="form-label">Username</label>
-                <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-</svg></span>
-                <input type="text" class="form-control" id="username" name="username" required placeholder="Masukan Username" aria-describedby="basic-addon3">
-                </div>   
-            
-                <label for="basic-url" class="form-label">Password</label>
-                <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
-  <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-</svg></span>
-                <input type="password" class="form-control" id="password" name="password" required placeholder="Masukan Password" aria-describedby="basic-addon3">
-                </div>   
+					<div class="container-login100-form-btn m-t-32">
+						<button name="login" type="submit" class="login100-form-btn">
+							Login
+						</button>
+					</div>
 
-                <div class="row mb-3">
-                    <button type="submit" class="btn btn-primary" name="bntlogin">Login</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+                    <div class="text-center">
+                            Belum punya akun, silahkan <a href="daftar.php">Daftar</a>
+                    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 
-    <!-- Optional JavaScript; choose one of the two! -->
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
-  </body>
+</body>
 </html>
