@@ -1,4 +1,12 @@
-    <!DOCTYPE html>
+<?php 
+session_start();
+
+if ( !isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+<!DOCTYPE html>
     <html lang="en">
     <!-- Basic -->
     <meta charset="utf-8">
@@ -34,7 +42,7 @@
         <header>
             <div class="header-top wow fadeIn">
                 <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="image"></a>
+                <a class="navbar-brand" href="#"><img src="images/logo.png" alt="image"></a>
                 </div>
                 </div>
             </div>
@@ -47,42 +55,43 @@
                     
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a class="active" href="index.html">Home</a></li>
-                            <li><a data-scroll href="login.php" style="margin-left:900px;">Login</a></li>
+                            <li><a class="active" href="admin.php">Home</a></li>
+                            <li><a data-scroll href="logout.php" style="margin-left:900px;">Logout</a></li>
                         </ul>
                     </div>
                 </nav>
                 </div>
             </div>
         </header>
-        <div id="home" class="parallax first-section wow fadeIn" data-stellar-background-ratio="0.4" style="background-image:url('images/slider-bg.png');">
+        <div id="about" class="section wow fadeIn">
             <div class="container">
+                <div class="heading">
+                <span class="icon-logo"><img src="images/icon-logo.png" alt="#"></span>
+                <h2>LIFE CARE</h2>
+                </div>
+                <!-- end title -->
                 <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="text-contant">
-                        <h2>
-                            <span class="center"><span class="icon"><img src="images/icon-logo.png" alt="#" /></span></span>
-                            <a href="" class="typewrite" data-period="2000" data-type='[ "Welcome to Life Care", "We Care Your Health", "We are Expert!" ]'>
-                            <span class="wrap"></span>
-                            </a>
-                            </div>
-                <div class="row">
-                <div class="col-md-6 " style="margin-left:280px;">
-                    <div class="message-box text-center">
+                <div class="col-md-6">
+                    <div class="message-box">
                         <h4>What We Do</h4>
-                        <a href="login.php" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Learn More</a>
+                        <h2>Information</h2>
+                        <p class="lead">Kami memiliki tenaga medis yang profesional dan ahli dalam bidangnya. Kami memiliki Dokter Spesialis, Dokter Gigi dan Dokter Umum yang siap membantu memberikan pelayanan kesehatan kepada anda.</p>
+                        <p>Kami menambah pelayanan penunjang yang berfokus kepada pelayanan kesehatan Umum dengan standard pelayanan yang telah dibuat Departemen Kesehatan</p>
+                        <a href="homeadmin.php" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Learn More</a>
                     </div>
                     <!-- end messagebox -->
                 </div>
-                        </h2>
+                <!-- end col -->
+                <div class="col-md-6">
+                    <div class="post-media wow fadeIn">
+                        <img src="images/about_03.jpg" alt="" class="img-responsive">
+                        <a href="http://www.youtube.com/watch?v=nrJtHemSPW4" data-rel="prettyPhoto[gal]" class="playbutton"><i class="flaticon-play-button"></i></a>
                     </div>
+                    <!-- end media -->
                 </div>
+                <!-- end col -->
                 </div>
-                <!-- end row -->
-                
-            <!-- end container -->
-        </div>
-                <a href="#home" data-scroll class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+        
         <!-- all js files -->
         <script src="js/all.js"></script>
         <!-- all plugins -->

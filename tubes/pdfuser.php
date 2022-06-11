@@ -53,8 +53,9 @@ if(isset($_GET["cari"])){
         </div>
     </div>
     </nav>
-    <i class="bi bi-journal-plus"><a href="pdfuser.php" class="btn btn-danger" target="blank">Ingin Cetak PDF? </i></a>
-        </button>
+    <button class="hidden btn btn-danger mt-3" onclick="window.print()">
+        <i class="bi bi-journal-plus">Cetak PDF</i>
+    </button>
 
     <div class="row mt-4">
         <div class="col-4">

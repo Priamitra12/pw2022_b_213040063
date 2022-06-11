@@ -29,14 +29,13 @@ if( isset($_POST["login"]) ) {
             if ($row['role']=="admin") {
                 $_SESSION['id_admin'] = $row['id'];
                 $_SESSION['role'] = "admin";
-                header("location:homeadmin.php");
+                header("location:admin.php");
             } else if ($row['role']=="user") {
                 $_SESSION['id_user'] = $row['id'];
                 $_SESSION['role'] = "user";
-                header("location:homeuser.php");
+                header("location:user.php");
             }
 
-			// header("Location: index.php");
 			exit;
 		}
 	}
@@ -104,7 +103,10 @@ if( isset($_POST["login"]) ) {
 					</div>
 
                     <div class="text-center">
-                            Belum punya akun, silahkan <a href="daftar.php">Daftar</a>
+                            Don`t have an account? Register <a href="daftar.php">In Here</a>
+                    </div>
+					<div class="text-center">
+                            Back to <a href="index.php">Home</a>
                     </div>
 				</form>
 			</div>

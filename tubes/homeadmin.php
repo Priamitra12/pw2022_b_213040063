@@ -37,14 +37,14 @@ if(isset($_GET["cari"])){
         <div class="container">
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">PRIM</a>
+        <a class="navbar-brand" href="#">Daftar Dokter</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="admin.php">Home</a>
             </li>
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="logout.php">Log Out</a>
@@ -53,6 +53,8 @@ if(isset($_GET["cari"])){
         </div>
     </div>
     </nav>
+    <i class="bi bi-journal-plus"><a href="pdfuser.php" class="btn btn-danger" target="blank">Ingin Cetak PDF? </i></a>
+        </button>
 
     <blockquote class="blockquote">
         <a href="tambah.php" type="button" class="btn btn-info mt-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
@@ -63,8 +65,8 @@ if(isset($_GET["cari"])){
         <div class="col-4">
             <form action="" method="get">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" name="keyword" placeholder="Masukan keyword pencarian" autocomplete="off">
-                <button class="btn btn-primary" type="submit" name="cari">Cari</button>
+                <input type="text" class="form-control" name="keyword" placeholder="Masukan keyword pencarian" autocomplete="off" id="keyword">
+                <button class="btn btn-primary" type="submit" name="cari" id="tombol-cari">Cari</button>
             </div>
             </form>
         </div>
@@ -72,6 +74,7 @@ if(isset($_GET["cari"])){
         <form class="form-inline" action="" methode="post">
             <div class="form-group">
             <div class="row mt-4">
+            <div id="container">
         <table class="table">
     <thead>
         <tr>
@@ -113,6 +116,7 @@ if(isset($_GET["cari"])){
     </tbody>
 </table>
     </div>
+    </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -123,5 +127,7 @@ if(isset($_GET["cari"])){
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
+    <!-- UNTUK JS SCRIPT -->
+    <script src="js/script.js"></script>
 </body>
 </html>
