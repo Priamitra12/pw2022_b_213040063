@@ -16,32 +16,38 @@ if( isset($_POST["login"]) ) {
 
 	$result = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username'");
 
-	// cek username
-	if( mysqli_num_rows($result) === 1 ) {
+	// cek email
 
-		// cek password
-		$row = mysqli_fetch_assoc($result);
-		if( password_verify($password, $row["password"]) ) {
-			// set session
-			$_SESSION["login"] = true;
-
-			//cek role admin
-            if ($row['role']=="admin") {
-                $_SESSION['id_admin'] = $row['id'];
-                $_SESSION['role'] = "admin";
-                header("location:admin.php");
-            } else if ($row['role']=="user") {
-                $_SESSION['id_user'] = $row['id'];
-                $_SESSION['role'] = "user";
-                header("location:user.php");
+    if (mysqli_num_rows($result) === 1) {
+        // cek password
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($password, $row["password"])) {
+            // set session
+            $_SESSION["login"] = true;
+            $_SESSION['role'] = $row["role"];
+            $_SESSION['id'] = $row["id"];
+			
+			if ($row['role'] == 'admin') {
+                echo "
+                <script>
+                    alert('Successfully Login As Admin');
+                    document.location.href = 'admin.php';
+                </script>
+            ";
+            } elseif ($row['role'] == 'user') {
+                echo "
+                <script>
+                    alert('Successfully Login As User');
+                    document.location.href = 'user.php';
+                </script>
+            ";
             }
 
-			exit;
-		}
+
+    $error = true;
+}
+
 	}
-
-	$error = true;
-
 }
 
 ?>
